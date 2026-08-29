@@ -1,27 +1,46 @@
 const App = () => {
-  const course = 'Half Stack application development'
-  const part1 = 'Fundamentals of React'
-  const exercises1 = 10
-  const part2 = 'Using props to pass data'
-  const exercises2 = 7
-  const part3 = 'State of a component'
-  const exercises3 = 14
+  const course = {name : 'Half Stack application development',
+  parts : [
+  {pname :'Fundamentals of React', exer : 10},
+  {pname :'Using props to pass data', exer : 7},
+  {pname : 'State of a component', exer : 14}
+  ]
+  }
 
   return (
     <div>
-      <h1>{course}</h1>
-      <p>
-        {part1} {exercises1}
-      </p>
-      <p>
-        {part2} {exercises2}
-      </p>
-      <p>
-        {part3} {exercises3}
-      </p>
-      <p>Number of exercises {exercises1 + exercises2 + exercises3}</p>
+      <Header name = {course.name} />
+      <Content parts = {course.parts}/>
+      <Total parts = {course.parts}/>
     </div>
   )
 }
+const Header = (props) => {
+  console.log({props})
+  return (
+  <>
+  <p>{props.name}</p> 
+  </>
 
+  )
+}
+
+const Content = (props) => {
+  return (
+  <>
+    <p>{props.parts[0].pname} {props.parts[0].exer}</p>
+    <p>{props.parts[1].pname} {props.parts[1].exer}</p>
+    <p>{props.parts[2].pname} {props.parts[2].exer}</p></>
+  )
+}
+
+const Total = (props) => {
+  const sum_exer =
+    props.parts.reduce((sum, part) => sum + part.exer,0);
+
+  return (
+  <>
+    <p>Number of exercises {sum_exer}</p></>
+  )
+}
 export default App
